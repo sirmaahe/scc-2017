@@ -6,13 +6,13 @@ from .models import Specialist, Organization, Order, Equipment
 class SpecialistSerializer(ModelSerializer):
     class Meta:
         model = Specialist
-        fields = '__all__'
+        exclude = ('user',)
 
 
 class OrganizationSerializer(ModelSerializer):
     class Meta:
         model = Organization
-        fields = '__all__'
+        exclude = ('user',)
 
 
 class OrderSerializer(ModelSerializer):

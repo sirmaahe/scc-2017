@@ -15,6 +15,7 @@ class Specialist(models.Model):
     user = models.OneToOneField(User, models.CASCADE)
     name = models.CharField(max_length=128)
     phone = models.CharField(max_length=10)
+    geodata = models.CharField(max_length=128, null=True)
 
 
 class Equipment(models.Model):

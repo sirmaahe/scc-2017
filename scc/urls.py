@@ -27,8 +27,8 @@ router.register('^equipment', EquipmentViewSet, 'equipment')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^specialist/', SpecialistView.as_view(**{'get': 'retrive', 'post': 'create', 'patch': 'partial_update'}), 'specialist'),
-    url(r'^organization/', OrganizationView.as_view(**{'get': 'retrive', 'post': 'create', 'patch': 'partial_update'}), 'organization'),
+    url(r'^specialist/', SpecialistView.as_view(), name='specialist'),
+    url(r'^organization/', OrganizationView.as_view(), name='organization'),
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/registration/', include('rest_auth.registration.urls'))
