@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class OrganizationProfile(models.Model):
+class Organization(models.Model):
     user = models.OneToOneField(User, models.CASCADE)
     name = models.CharField(max_length=128)
     address = models.CharField(max_length=256)
@@ -22,7 +22,7 @@ class Equipment(models.Model):
     serial_number = models.CharField(max_length=128)
     program = models.CharField(max_length=128)
     operational_system = models.CharField(max_length=128)
-    organization = models.ForeignKey(OrganizationProfile, models.CASCADE)
+    organization = models.ForeignKey(Organization, models.CASCADE)
 
 
 class Order(models.Model):
@@ -31,4 +31,4 @@ class Order(models.Model):
     work_complete_at = models.DateTimeField(null=True, blank=True)
     equipment = models.ForeignKey(Equipment, models.CASCADE)
     description = models.TextField(null=True, blank=True)
-    specialist = models.ForeignKey(Specialist, models.CASCADE)
+    specialist = models.ForeignKey(Specialist, models.CASCADE, null=True)

@@ -15,11 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from rest_framework.routers import DefaultRouter
+
+from .views import SpecialistView, OrganizationView, OrderViewSet, EquipmentViewSet
+
+
+router = DefaultRouter()
+router.register('^orders', OrderViewSet, 'orders')
+router.register('^equipment', EquipmentViewSet, 'equipment')
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^specialist/', SpecialistView.as_view(**{'get': 'retrive', 'post': 'create', 'patch': 'partial_update'}), 'specialist'),
+    url(r'^organization/', OrganizationView.as_view(**{'get': 'retrive', 'post': 'create', 'patch': 'partial_update'}), 'organization'),
+    url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/registration/', include('rest_auth.registration.urls'))
-
-]
+] + router.urls
