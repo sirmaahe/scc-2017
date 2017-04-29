@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class OrganizationProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, models.CASCADE)
     name = models.CharField(max_length=128)
     address = models.CharField(max_length=256)
     actual_address = models.CharField(max_length=256)
@@ -12,7 +12,7 @@ class OrganizationProfile(models.Model):
 
 
 class Specialist(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, models.CASCADE)
     name = models.CharField(max_length=128)
     phone = models.CharField(max_length=10)
 
@@ -22,7 +22,13 @@ class Equipment(models.Model):
     serial_number = models.CharField(max_length=128)
     program = models.CharField(max_length=128)
     operational_system = models.CharField(max_length=128)
-    organization = models.ForeignKey(OrganizationProfile)
+    organization = models.ForeignKey(OrganizationProfile, models.CASCADE)
 
 
-class 
+class Order(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    work_begin_at = models.DateTimeField(null=True, blank=True)
+    work_complete_at = models.DateTimeField(null=True, blank=True)
+    equipment = models.ForeignKey(Equipment, models.CASCADE)
+    description = models.TextField(null=True, blank=True)
+    specialist = models.ForeignKey(Specialist, models.CASCADE)
