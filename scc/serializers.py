@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 
 from .models import Specialist, Organization, Order, Equipment
 
@@ -17,6 +17,8 @@ class OrganizationSerializer(ModelSerializer):
 
 class OrderSerializer(ModelSerializer):
     organization = OrganizationSerializer(source='equipment.organization', read_only=True)
+    equipment = PrimaryKeyRelatedField(queryset=Equipment.objects.all())
+    specialist = PrimaryKeyRelatedField(queryset=Specialist.objects.all())
 
     class Meta:
         model = Order
@@ -24,6 +26,8 @@ class OrderSerializer(ModelSerializer):
 
 
 class EquipmentSerializer(ModelSerializer):
+    organization = PrimaryKeyRelatedField(queryset=Organization.objects.all())
+
     class Meta:
         model = Equipment
         fields = '__all__'
