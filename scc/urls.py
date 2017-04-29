@@ -30,6 +30,5 @@ urlpatterns = [
     url(r'^specialist/', SpecialistView.as_view(), name='specialist'),
     url(r'^organization/', OrganizationView.as_view(), name='organization'),
     url(r'^auth/', include('rest_auth.urls')),
-    url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/registration/', include('rest_auth.registration.urls'))
 ] + router.urls
